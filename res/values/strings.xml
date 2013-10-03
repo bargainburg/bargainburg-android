@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Slick Deals!</string>
+    <string name="app_name">Bargain Burg</string>
+    <string name="pick_your_nose">Pick Your Nose</string>
+    <string name="pick_rule">Pick</string>
+</resources>
