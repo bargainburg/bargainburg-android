@@ -4,14 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockFragment;
+import android.widget.ListAdapter;
+import com.bargainburg.android.Adapters.ListAdapterCategories;
+import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
 
-public class KingsRules extends RoboSherlockFragment {
+import java.util.ArrayList;
+
+public class KingsRules extends RoboSherlockListFragment {
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ArrayList<String> testListArray = new ArrayList<String>();
+        String listTestString = "aString";
+        for (int i = 0; i < 10; i++) {
+            testListArray.add(listTestString);
+            listTestString = listTestString + "" + i;
+        }
+        ListAdapter listAdapter = new ListAdapterCategories(getActivity(), testListArray);
+        setListAdapter(listAdapter);
     }
 
     @Override
@@ -24,5 +36,7 @@ public class KingsRules extends RoboSherlockFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+
 
 }
