@@ -1,6 +1,6 @@
 package com.bargainburg.android;
 
-import com.bargainburg.android.Datastore;
+import com.bargainburg.android.Data.Datastore;
 import com.google.inject.Injector;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;

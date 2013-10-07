@@ -1,20 +1,15 @@
-package com.bargainburg.android;
-
-import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockFragment;
+package com.bargainburg.android.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import oak.widget.TextViewWithFont;
+import com.bargainburg.android.R;
+import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockFragment;
 import roboguice.inject.InjectResource;
-import roboguice.inject.InjectView;
 
 public class Search extends RoboSherlockFragment {
 
-    @InjectView(R.id.display_text)
-        private TextViewWithFont displayText;
     @InjectResource(R.color.custom_blue)
         private int customBlue;
 
@@ -22,7 +17,7 @@ public class Search extends RoboSherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        View newView = inflater.inflate(R.layout.tab_template,container,false);
+        View newView = inflater.inflate(R.layout.search_fragment,container,false);
         return newView;
     }
 
@@ -30,8 +25,5 @@ public class Search extends RoboSherlockFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Injection occurs in onViewCreated
-
-        displayText.setText("And then there is tab C");
-        displayText.setTextColor(customBlue);
     }
 }

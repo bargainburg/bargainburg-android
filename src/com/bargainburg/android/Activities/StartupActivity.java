@@ -1,9 +1,14 @@
-package com.bargainburg.android;
+package com.bargainburg.android.Activities;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.ActionBar;
+import com.bargainburg.android.Fragments.Categories;
+import com.bargainburg.android.Fragments.Companies;
+import com.bargainburg.android.Fragments.Search;
+import com.bargainburg.android.MainApp;
+import com.bargainburg.android.R;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 
 import android.graphics.PixelFormat;

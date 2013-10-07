@@ -1,4 +1,4 @@
-package com.bargainburg.android;
+package com.bargainburg.android.Data;
 
 import android.content.Context;
 import android.content.SharedPreferences;

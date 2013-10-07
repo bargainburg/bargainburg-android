@@ -1,5 +1,7 @@
 package com.bargainburg.android;
 
+import com.bargainburg.android.Data.EncryptedPreferencesProvider;
+import com.bargainburg.android.Data.EncryptedSharedPreferences;
 import com.google.inject.AbstractModule;
 
 /**

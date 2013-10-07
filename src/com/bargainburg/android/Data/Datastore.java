@@ -1,4 +1,4 @@
-package com.bargainburg.android;
+package com.bargainburg.android.Data;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

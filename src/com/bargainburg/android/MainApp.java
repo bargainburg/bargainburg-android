@@ -1,5 +1,6 @@
 package com.bargainburg.android;
 
+import com.bargainburg.android.Data.Datastore;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -13,7 +14,8 @@ public class MainApp extends Application {
 
     public static String TAG = "bargainburg-android";
 
-    @Inject Datastore mDataStore;
+    @Inject
+    Datastore mDataStore;
 
 
     @Override
