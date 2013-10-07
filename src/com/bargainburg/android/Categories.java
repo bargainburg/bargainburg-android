@@ -10,7 +10,7 @@ import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFra
 
 import java.util.ArrayList;
 
-public class KingsRules extends RoboSherlockListFragment {
+public class Categories extends RoboSherlockListFragment {
 
 
     @Override

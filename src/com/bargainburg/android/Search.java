@@ -11,7 +11,7 @@ import oak.widget.TextViewWithFont;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 
-public class TabC extends RoboSherlockFragment {
+public class Search extends RoboSherlockFragment {
 
     @InjectView(R.id.display_text)
         private TextViewWithFont displayText;

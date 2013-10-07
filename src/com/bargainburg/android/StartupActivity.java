@@ -26,9 +26,9 @@ public class StartupActivity extends RoboSherlockFragmentActivity implements Act
         setContentView(R.layout.startup_tabs);
 
         bar = getSupportActionBar();
-        bar.addTab(bar.newTab().setText("Categories").setTabListener(this).setTag(KingsRules.class.getName()));
-        bar.addTab(bar.newTab().setText("Companies").setTabListener(this).setTag(NeverHaveIEver.class.getName()));
-        bar.addTab(bar.newTab().setText("Search").setTabListener(this).setTag(TabC.class.getName()));
+        bar.addTab(bar.newTab().setText("Categories").setTabListener(this).setTag(Categories.class.getName()));
+        bar.addTab(bar.newTab().setText("Companies").setTabListener(this).setTag(Companies.class.getName()));
+        bar.addTab(bar.newTab().setText("Search").setTabListener(this).setTag(Search.class.getName()));
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setSelectedNavigationItem(0);
         pager.setAdapter(new OakAdapter(getSupportFragmentManager()));

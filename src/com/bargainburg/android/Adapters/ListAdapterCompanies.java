@@ -13,19 +13,20 @@ import java.util.ArrayList;
 /**
  * Created with IntelliJ IDEA.
  * User: christhoma
- * Date: 8/12/13
- * Time: 3:36 PM
+ * Date: 10/4/13
+ * Time: 8:03 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ListAdapterRules extends BaseAdapter {
-    ArrayList<String> items = new ArrayList<String>();
+public class ListAdapterCompanies extends BaseAdapter {
+
+    /* TODO: change to company objects */
+    ArrayList<String> companies = new ArrayList<String>();
     Context context;
 
-    public ListAdapterRules(Context context, ArrayList<String> list) {
+    public ListAdapterCompanies(Context context, ArrayList<String> companies) {
+        this.companies = companies;
         this.context = context;
-        items = list;
     }
-
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
@@ -47,19 +48,19 @@ public class ListAdapterRules extends BaseAdapter {
         TextView text;
     }
 
-
     @Override
     public int getCount() {
-        return items.size();
+        return companies.size();
     }
 
     @Override
     public String getItem(int position) {
-        return items.get(position);
+        return companies.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         return position;
     }
+
 }
