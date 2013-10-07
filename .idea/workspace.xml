@@ -258,7 +258,7 @@
     <file path="/search_fragment.xml" changelist="31862a92-2921-4ad8-828e-81cba78d6c40" time="1381117348039" ignored="false" />
     <file path="/Search.java" changelist="31862a92-2921-4ad8-828e-81cba78d6c40" time="1381116554676" ignored="false" />
     <file path="$PROJECT_DIR$/test/com/drink123/android/DatastoreTest.java" changelist="31862a92-2921-4ad8-828e-81cba78d6c40" time="1381170671646" ignored="false" />
-    <file path="/Coupon.java" changelist="31862a92-2921-4ad8-828e-81cba78d6c40" time="1381170804806" ignored="false" />
+    <file path="/Coupon.java" changelist="31862a92-2921-4ad8-828e-81cba78d6c40" time="1381171650799" ignored="false" />
     <file path="/Merchant.java" changelist="31862a92-2921-4ad8-828e-81cba78d6c40" time="1381170989257" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -344,10 +344,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Merchant.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Merchant.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/API/Merchant.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="17" selection-start="318" selection-end="318" vertical-scroll-proportion="0.29591838">
+            <state line="14" column="17" selection-start="318" selection-end="318" vertical-scroll-proportion="-5.8">
               <folding />
             </state>
           </provider>
@@ -362,10 +362,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Coupon.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Coupon.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/API/Coupon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="218" selection-end="218" vertical-scroll-proportion="-6.0">
+            <state line="11" column="21" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -386,7 +386,7 @@
       <file leaf-file-name="list_item.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/list_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="31" selection-start="458" selection-end="458" vertical-scroll-proportion="-5.5555553">
+            <state line="9" column="0" selection-start="382" selection-end="382" vertical-scroll-proportion="-5.0">
               <folding />
             </state>
           </provider>
@@ -407,7 +407,6 @@
       <list>
         <option value="$PROJECT_DIR$/target/generated-sources/r/com/drink123/android/BuildConfig.java" />
         <option value="$PROJECT_DIR$/res/values/array.xml" />
-        <option value="$PROJECT_DIR$/res/layout/list_item.xml" />
         <option value="$PROJECT_DIR$/src/com/bargainburg/android/KingsRules.java" />
         <option value="$PROJECT_DIR$/src/com/bargainburg/android/Categories.java" />
         <option value="$PROJECT_DIR$/src/com/bargainburg/android/StartupActivity.java" />
@@ -418,11 +417,64 @@
         <option value="$PROJECT_DIR$/src/com/bargainburg/android/Search.java" />
         <option value="$PROJECT_DIR$/res/layout/search_fragment.xml" />
         <option value="$PROJECT_DIR$/res/layout/simple_list_fragment.xml" />
-        <option value="$PROJECT_DIR$/src/com/bargainburg/android/API/Coupon.java" />
         <option value="$PROJECT_DIR$/src/com/bargainburg/android/API/Category.java" />
         <option value="$PROJECT_DIR$/src/com/bargainburg/android/API/Merchant.java" />
+        <option value="$PROJECT_DIR$/res/layout/list_item.xml" />
+        <option value="$PROJECT_DIR$/src/com/bargainburg/android/API/Coupon.java" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="bargainburg-android" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="bargainburg-android" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="com.willowtreeapps:oak-library:1.1.7-SNAPSHOT" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependencyNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="bargainburg-android" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
   </component>
   <component name="ProjectFrameBounds">
     <option name="width" value="1440" />
@@ -833,7 +885,7 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270525" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998565" sideWeight="0.6770574" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16786227" sideWeight="0.6770574" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32294264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -971,31 +1023,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/simple_list_fragment.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="36" selection-start="437" selection-end="437" vertical-scroll-proportion="-6.111111">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="13" selection-start="245" selection-end="245" vertical-scroll-proportion="0.12244898">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="31" selection-start="458" selection-end="458" vertical-scroll-proportion="-5.5555553">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/RoboGuiceModule.java">
@@ -1015,9 +1047,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/API/Coupon.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/API/Merchant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="218" selection-end="218" vertical-scroll-proportion="-6.0">
+        <state line="14" column="17" selection-start="318" selection-end="318" vertical-scroll-proportion="-5.8">
           <folding />
         </state>
       </provider>
@@ -1029,9 +1061,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/API/Merchant.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/simple_list_fragment.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="17" selection-start="318" selection-end="318" vertical-scroll-proportion="0.29591838">
+        <state line="11" column="36" selection-start="437" selection-end="437" vertical-scroll-proportion="-6.111111">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="382" selection-end="382" vertical-scroll-proportion="-5.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bargainburg/android/API/Coupon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="21" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
