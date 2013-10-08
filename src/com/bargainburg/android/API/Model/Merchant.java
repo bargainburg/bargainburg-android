@@ -10,22 +10,22 @@ import com.google.gson.annotations.SerializedName;
  * To change this template use File | Settings | File Templates.
  */
 public class Merchant {
-    int id;
-    String name;
-    String email;
-    String phone;
-    String hours;
-    String link;
-    String description;
-    boolean approved;
+    public int id;
+    public String name;
+    public String email;
+    public String phone;
+    public String hours;
+    public String link;
+    public String description;
+    public boolean approved;
     @SerializedName("price_range")
-    int priceRange;
+    public int priceRange;
     @SerializedName("created_at")
-    String createDate;
+    public String createDate;
     @SerializedName("updated_at")
-    String updatedDate;
+    public String updatedDate;
     @SerializedName("category_id")
-    int categoryId;
+    public int categoryId;
     @SerializedName("user_id")
-    int userId;
+    public int userId;
 }

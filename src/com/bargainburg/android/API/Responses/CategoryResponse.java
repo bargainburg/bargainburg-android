@@ -1,5 +1,9 @@
 package com.bargainburg.android.API.Responses;
 
+import com.bargainburg.android.API.Model.Category;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: christhoma
@@ -7,5 +11,7 @@ package com.bargainburg.android.API.Responses;
  * Time: 3:51 PM
  * To change this template use File | Settings | File Templates.
  */
-public class CategoryResponse {
+public class CategoryResponse extends BaseResponse {
+
+    public List<Category> categories;
 }

@@ -10,28 +10,28 @@ import com.google.gson.annotations.SerializedName;
  * To change this template use File | Settings | File Templates.
  */
 public class Coupon {
-    int id;
+    public int id;
     @SerializedName("begin_date")
-    String beginDate;
+    public String beginDate;
     @SerializedName("end_date")
-    String endDate;
-    String description;
-    boolean hidden;
-    String name;
+    public String endDate;
+    public String description;
+    public boolean hidden;
+    public String name;
     @SerializedName("created_at")
-    String createdDate;
+    public String createdDate;
     @SerializedName("updated_at")
-    String updatedDate;
+    public String updatedDate;
     @SerializedName("category_id")
-    int categoryId;
+    public int categoryId;
     @SerializedName("merchant_id")
-    int merchantId;
+    public int merchantId;
     @SerializedName("image_file_name")
-    String image;
+    public String image;
     @SerializedName("image_content_type")
-    String imageType;
+    public String imageType;
     @SerializedName("image_file_size")
-    String imageFileSize;
+    public String imageFileSize;
     @SerializedName("image_updated_at")
-    String imageUpdatedAt;
+    public String imageUpdatedAt;
 }

@@ -1,9 +1,11 @@
 package com.bargainburg.android.API;
 
 import android.util.Log;
+import com.bargainburg.android.API.Model.Category;
 import com.bargainburg.android.API.Responses.CategoryResponse;
 import com.bargainburg.android.Data.Datastore;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.inject.Inject;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -13,6 +15,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,7 +52,19 @@ public class BargainBurgApi {
             } else {
                 in = connection.getInputStream();
             }
-            return mGson.fromJson(new InputStreamReader(in), type);
+            InputStreamReader reader = new InputStreamReader(in);
+            /*
+                        InputStreamReader reader = new InputStreamReader(in);
+            JsonParser parser = new JsonParser();
+            JsonArray jarray = parser.parse(reader).getAsJsonArray();
+            ArrayList<Category> categories = new ArrayList<Category>();
+            for (JsonElement obj : jarray) {
+                Category category = mGson.fromJson(obj, Category.class);
+                categories.add(category);
+            }
+            return categories;
+             */
+            return mGson.fromJson(reader, type);
         } catch (Exception e) {
             Log.e("api_get", url, e);
             return null;
@@ -60,6 +75,11 @@ public class BargainBurgApi {
 
     public CategoryResponse getCategories() throws Exception {
         String url = BACKEND_URL_CATEGORIES;
-        return get(url, CategoryResponse.class);
+        Type type = new TypeToken<List<Category>>() {
+        }.getType();
+        Log.d("API", url);
+        CategoryResponse response = new CategoryResponse();
+        response.categories = get(url, type);
+        return response;
     }
 }

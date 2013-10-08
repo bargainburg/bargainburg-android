@@ -1,22 +1,22 @@
 package com.bargainburg.android.Activities;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import com.actionbarsherlock.app.ActionBar;
-import com.bargainburg.android.Fragments.Categories;
-import com.bargainburg.android.Fragments.Companies;
-import com.bargainburg.android.Fragments.Search;
-import com.bargainburg.android.MainApp;
-import com.bargainburg.android.R;
-import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
-
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Window;
+import com.actionbarsherlock.app.ActionBar;
+import com.bargainburg.android.Fragments.CategoriesFragment;
+import com.bargainburg.android.Fragments.CompaniesFragment;
+import com.bargainburg.android.Fragments.SearchFragment;
+import com.bargainburg.android.MainApp;
+import com.bargainburg.android.Otto.BusProvider;
+import com.bargainburg.android.R;
+import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import roboguice.inject.InjectView;
 
 public class StartupActivity extends RoboSherlockFragmentActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
@@ -31,14 +31,26 @@ public class StartupActivity extends RoboSherlockFragmentActivity implements Act
         setContentView(R.layout.startup_tabs);
 
         bar = getSupportActionBar();
-        bar.addTab(bar.newTab().setText("Categories").setTabListener(this).setTag(Categories.class.getName()));
-        bar.addTab(bar.newTab().setText("Companies").setTabListener(this).setTag(Companies.class.getName()));
-        bar.addTab(bar.newTab().setText("Search").setTabListener(this).setTag(Search.class.getName()));
+        bar.addTab(bar.newTab().setText("Categories").setTabListener(this).setTag(CategoriesFragment.class.getName()));
+        bar.addTab(bar.newTab().setText("Companies").setTabListener(this).setTag(CompaniesFragment.class.getName()));
+        bar.addTab(bar.newTab().setText("Search").setTabListener(this).setTag(SearchFragment.class.getName()));
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setSelectedNavigationItem(0);
         pager.setAdapter(new OakAdapter(getSupportFragmentManager()));
         pager.setOnPageChangeListener(this);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
     }
 
     @Override

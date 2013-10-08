@@ -2,15 +2,15 @@ package com.bargainburg.android.API;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.bargainburg.android.API.Model.Category;
+import android.util.Log;
+import com.bargainburg.android.API.Responses.BaseResponse;
 import com.bargainburg.android.API.Responses.CategoryResponse;
 import com.bargainburg.android.Data.Datastore;
 import com.bargainburg.android.Otto.BusProvider;
+import com.bargainburg.android.Otto.Events.CategoryEvent;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import roboguice.service.RoboIntentService;
-
-import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,34 +38,37 @@ public class APIService extends RoboIntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.d("API", "handling intent");
         Bundle extras = intent.getExtras();
         switch (extras.getInt(API_CALL)) {
             case GET_CATEGORIES:
                 getCategories(extras);
                 break;
-            case GET_COMPANIES:
-                getCompanies(extras);
-                break;
-            case GET_COUPONS:
-                getCoupons(extras);
-                break;
+//            case GET_COMPANIES:
+//                getCompanies(extras);
+//                break;
+//            case GET_COUPONS:
+//                getCoupons(extras);
+//                break;
             default:
                 break;
         }
     }
 
     private void getCategories(Bundle data) {
+        Log.d("API", "getting categories");
         BaseResponse response;
         try {
             response = mBargainBurgApi.getCategories();
-            for (Category category : ((CategoryResponse)response).categories) {
-                category.jsonRepresentation = mGson.toJson(category);
-            }
+            response.success = true;
+            response.error = false;
         } catch (Exception e) {
             e.printStackTrace();
             response = new CategoryResponse();
-            response.error = BaseResponse.ERROR_IO_EXCEPTION;
+            response.success = false;
+            response.error = true;
         }
+        Log.d("API", "posting response : success == " + response.success);
         BusProvider.getInstance().post(new CategoryEvent((CategoryResponse)response));
     }
 

@@ -10,10 +10,10 @@ import com.google.gson.annotations.SerializedName;
  * To change this template use File | Settings | File Templates.
  */
 public class Category {
-    int id;
-    String name;
+    public int id;
+    public String name;
     @SerializedName("created_at")
-    String createDate;
+    public String createDate;
     @SerializedName("updated_at")
-    String updatedDate;
+    public String updatedDate;
 }
