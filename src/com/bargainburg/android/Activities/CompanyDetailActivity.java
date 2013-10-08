@@ -9,5 +9,5 @@ import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivit
  * Time: 4:20 PM
  */
 public class CompanyDetailActivity extends RoboSherlockActivity {
-    
+
 }
