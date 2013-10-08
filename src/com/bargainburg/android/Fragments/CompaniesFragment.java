@@ -25,6 +25,9 @@ public class CompaniesFragment extends RoboSherlockListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = new Intent(getActivity(), APIService.class);
+        intent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES);
+        getActivity().startService(intent);
         ListAdapter listAdapter = new ListAdapterCompanies(getActivity(), companies);
         setListAdapter(listAdapter);
     }
@@ -32,9 +35,6 @@ public class CompaniesFragment extends RoboSherlockListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Intent intent = new Intent(getActivity(), APIService.class);
-        intent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES);
-        getActivity().startService(intent);
         Log.d("API", "resume");
         BusProvider.getInstance().register(this);
     }
