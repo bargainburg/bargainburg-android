@@ -53,17 +53,6 @@ public class BargainBurgApi {
                 in = connection.getInputStream();
             }
             InputStreamReader reader = new InputStreamReader(in);
-            /*
-                        InputStreamReader reader = new InputStreamReader(in);
-            JsonParser parser = new JsonParser();
-            JsonArray jarray = parser.parse(reader).getAsJsonArray();
-            ArrayList<Category> categories = new ArrayList<Category>();
-            for (JsonElement obj : jarray) {
-                Category category = mGson.fromJson(obj, Category.class);
-                categories.add(category);
-            }
-            return categories;
-             */
             return mGson.fromJson(reader, type);
         } catch (Exception e) {
             Log.e("api_get", url, e);

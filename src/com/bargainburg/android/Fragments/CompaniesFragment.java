@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
-import com.bargainburg.android.Adapters.ListAdapterCategories;
+import com.bargainburg.android.Adapters.ListAdapterCompanies;
 import com.bargainburg.android.R;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
 
@@ -22,7 +22,7 @@ public class CompaniesFragment extends RoboSherlockListFragment {
             testListArray.add(listTestString);
             listTestString = listTestString + "" + i;
         }
-        ListAdapter listAdapter = new ListAdapterCategories(getActivity(), testListArray);
+        ListAdapter listAdapter = new ListAdapterCompanies(getActivity(), testListArray);
         setListAdapter(listAdapter);
     }
 

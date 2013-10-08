@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import com.bargainburg.android.API.Model.Category;
 import com.bargainburg.android.R;
 
 import java.util.ArrayList;
@@ -18,10 +19,10 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class ListAdapterCategories extends BaseAdapter {
-    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<Category> items = new ArrayList<Category>();
     Context context;
 
-    public ListAdapterCategories(Context context, ArrayList<String> list) {
+    public ListAdapterCategories(Context context, ArrayList<Category> list) {
         this.context = context;
         items = list;
     }
@@ -38,7 +39,7 @@ public class ListAdapterCategories extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.text.setText(getItem(position));
+        holder.text.setText(getItem(position).name);
         view.setSelected(true);
         return view;
     }
@@ -54,7 +55,7 @@ public class ListAdapterCategories extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public Category getItem(int position) {
         return items.get(position);
     }
 

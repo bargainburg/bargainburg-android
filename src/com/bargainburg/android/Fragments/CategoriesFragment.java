@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import com.bargainburg.android.API.APIService;
+import com.bargainburg.android.API.Model.Category;
 import com.bargainburg.android.Adapters.ListAdapterCategories;
 import com.bargainburg.android.Otto.BusProvider;
 import com.bargainburg.android.Otto.Events.CategoryEvent;
@@ -20,18 +21,17 @@ import java.util.ArrayList;
 
 public class CategoriesFragment extends RoboSherlockListFragment {
 
-    ArrayList<String> testListArray = new ArrayList<String>();
+    ArrayList<Category> categories = new ArrayList<Category>();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String listTestString = "aString";
-        for (int i = 0; i < 10; i++) {
-            testListArray.add(listTestString);
-            listTestString = listTestString + "" + i;
-        }
-        ListAdapter listAdapter = new ListAdapterCategories(getActivity(), testListArray);
+        Intent intent = new Intent(getActivity(), APIService.class);
+        intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
+        getActivity().startService(intent);
+        Log.d("API", "starting service");
+        ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
         setListAdapter(listAdapter);
     }
 
@@ -61,18 +61,17 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(getActivity(), APIService.class);
-        intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
-        getActivity().startService(intent);
-        Log.d("API", "starting service");
     }
 
     @Subscribe
     public void getCategories(CategoryEvent categoryEvent) {
-        if (!categoryEvent.response.error) {
+        if (categoryEvent.response.success) {
             Log.d("API", "success!" + categoryEvent.response.categories.get(0).name);
-            testListArray.add(categoryEvent.response.categories.get(0).name);
-            ListAdapter listAdapter = new ListAdapterCategories(getActivity(), testListArray);
+            for (Category category : categoryEvent.response.categories) {
+                Log.d("API", category.name);
+                categories.add(category);
+            }
+            ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
             setListAdapter(listAdapter);
         } else {
             Log.d("API", "failure!");
