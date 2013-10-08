@@ -10,10 +10,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Category;
+import com.bargainburg.android.Activities.CategoryListActivity;
 import com.bargainburg.android.Adapters.ListAdapterCategories;
 import com.bargainburg.android.Otto.BusProvider;
 import com.bargainburg.android.Otto.Events.CategoryEvent;
 import com.bargainburg.android.R;
+import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
 import com.squareup.otto.Subscribe;
 
@@ -62,6 +64,11 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        Intent intent = new Intent(getActivity(), CategoryListActivity.class);
+        Category category = ((Category)getListAdapter().getItem(position));
+        intent.putExtra(EX.CATEGORY, category.name);
+        intent.putExtra(EX.ID, category.id);
+        getActivity().startActivity(intent);
     }
 
     @Subscribe

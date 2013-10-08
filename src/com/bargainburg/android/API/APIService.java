@@ -10,6 +10,7 @@ import com.bargainburg.android.Data.Datastore;
 import com.bargainburg.android.Otto.BusProvider;
 import com.bargainburg.android.Otto.Events.CategoryEvent;
 import com.bargainburg.android.Otto.Events.CompanyEvent;
+import com.bargainburg.android.Util.EX;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import roboguice.service.RoboIntentService;
@@ -28,6 +29,7 @@ public class APIService extends RoboIntentService {
     public static final int GET_CATEGORIES = 0x01;
     public static final int GET_COMPANIES = 0x02;
     public static final int GET_COUPONS = 0x03;
+    public static final int GET_COMPANIES_FOR_CATEGORY = 0x04;
 
     private Gson mGson = new Gson();
 
@@ -42,12 +44,17 @@ public class APIService extends RoboIntentService {
     protected void onHandleIntent(Intent intent) {
         Log.d("API", "handling intent");
         Bundle extras = intent.getExtras();
-        switch (extras.getInt(API_CALL)) {
+        int apiCall = extras.getInt(API_CALL, -1);
+        switch (apiCall) {
             case GET_CATEGORIES:
                 getCategories(extras);
                 break;
             case GET_COMPANIES:
                 getCompanies(extras);
+                break;
+            case GET_COMPANIES_FOR_CATEGORY:
+                int id = extras.getInt(EX.ID, 1);
+                getCompaniesForCategory(id);
                 break;
 //            case GET_COUPONS:
 //                getCoupons(extras);
@@ -72,6 +79,20 @@ public class APIService extends RoboIntentService {
         }
         Log.d("API", "posting response : success == " + response.success);
         BusProvider.getInstance().post(new CategoryEvent((CategoryResponse) response));
+    }
+
+    private void getCompaniesForCategory(int id) {
+        BaseResponse response;
+        try {
+            response = mBargainBurgApi.getCompaniesForCategory(id);
+            response.success = true;
+            response.error = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = new CompanyResponse();
+            response.success = false;
+            response.error = true;
+        } BusProvider.getInstance().post(new CompanyEvent((CompanyResponse)response));
     }
 
     private void getCompanies(Bundle data) {

@@ -40,6 +40,7 @@ public class BargainBurgApi {
     }
 
     private <T> T get(String url, Type type) throws IOException {
+        Log.d("API", url);
         URL getUrl = new URL(url);
         HttpURLConnection connection = mOkHttpClient.open(getUrl);
         InputStream in = null;
@@ -71,6 +72,16 @@ public class BargainBurgApi {
         Log.d("API", url);
         CategoryResponse response = new CategoryResponse();
         response.categories = get(url, type);
+        return response;
+    }
+
+    public CompanyResponse getCompaniesForCategory(int id) throws Exception {
+        String url = BACKEND_URL_CATEGORIES + id;
+        Log.d("API", url);
+        Type type = new TypeToken<List<Merchant>>() {
+        }.getType();
+        CompanyResponse response = new CompanyResponse();
+        response.companies = get(url, type);
         return response;
     }
 
