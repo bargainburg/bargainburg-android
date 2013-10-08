@@ -2,7 +2,9 @@ package com.bargainburg.android.API;
 
 import android.util.Log;
 import com.bargainburg.android.API.Model.Category;
+import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.API.Responses.CategoryResponse;
+import com.bargainburg.android.API.Responses.CompanyResponse;
 import com.bargainburg.android.Data.Datastore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,11 +24,11 @@ import java.util.List;
  * User: christhoma
  * Date: 10/7/13
  * Time: 6:24 PM
- * To change this template use File | Settings | File Templates.
  */
 public class BargainBurgApi {
 
     public static final String BACKEND_URL_CATEGORIES = "http://api.bargainburg.co/v1/categories/";
+    public static final String BACKEND_URL_COMPANIES = "http://api.bargainburg.co/v1/merchants/";
 
     private Datastore mDataStore;
     private OkHttpClient mOkHttpClient;
@@ -69,6 +71,15 @@ public class BargainBurgApi {
         Log.d("API", url);
         CategoryResponse response = new CategoryResponse();
         response.categories = get(url, type);
+        return response;
+    }
+
+    public CompanyResponse getCompanies() throws Exception {
+        String url = BACKEND_URL_COMPANIES;
+        Type type = new TypeToken<List<Merchant>>() {
+        }.getType();
+        CompanyResponse response = new CompanyResponse();
+        response.companies = get(url, type);
         return response;
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.R;
 
 import java.util.ArrayList;
@@ -19,11 +20,10 @@ import java.util.ArrayList;
  */
 public class ListAdapterCompanies extends BaseAdapter {
 
-    /* TODO: change to company objects */
-    ArrayList<String> companies = new ArrayList<String>();
+    ArrayList<Merchant> companies = new ArrayList<Merchant>();
     Context context;
 
-    public ListAdapterCompanies(Context context, ArrayList<String> companies) {
+    public ListAdapterCompanies(Context context, ArrayList<Merchant> companies) {
         this.companies = companies;
         this.context = context;
     }
@@ -39,7 +39,7 @@ public class ListAdapterCompanies extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.text.setText(getItem(position));
+        holder.text.setText(getItem(position).name);
         view.setSelected(true);
         return view;
     }
@@ -54,7 +54,7 @@ public class ListAdapterCompanies extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public Merchant getItem(int position) {
         return companies.get(position);
     }
 

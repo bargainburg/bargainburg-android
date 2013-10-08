@@ -27,10 +27,6 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(getActivity(), APIService.class);
-        intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
-        getActivity().startService(intent);
-        Log.d("API", "starting service");
         ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
         setListAdapter(listAdapter);
     }
@@ -38,12 +34,17 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Intent intent = new Intent(getActivity(), APIService.class);
+        intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
+        getActivity().startService(intent);
+        Log.d("API", "starting service");
         BusProvider.getInstance().register(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        Log.d("API", "pausing");
         BusProvider.getInstance().unregister(this);
     }
 
@@ -66,6 +67,7 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Subscribe
     public void getCategories(CategoryEvent categoryEvent) {
         if (categoryEvent.response.success) {
+            categories = new ArrayList<Category>();
             Log.d("API", "success!" + categoryEvent.response.categories.get(0).name);
             for (Category category : categoryEvent.response.categories) {
                 Log.d("API", category.name);
