@@ -12,4 +12,5 @@ import java.util.List;
  */
 public class CompanyResponse extends BaseResponse {
     public List<Merchant> companies;
+    public Merchant company;
 }

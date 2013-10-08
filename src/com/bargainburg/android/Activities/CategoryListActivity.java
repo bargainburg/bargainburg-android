@@ -60,8 +60,12 @@ public class CategoryListActivity extends RoboSherlockListActivity {
     public void getCompanies(CompanyEvent companyEvent) {
         if (companyEvent.response.success) {
             companies = new ArrayList<Merchant>();
-            for (Merchant company : companyEvent.response.companies) {
-                companies.add(company);
+            if (companyEvent.response.company != null) {
+                companies.add(companyEvent.response.company);
+            } else {
+                for (Merchant company : companyEvent.response.companies) {
+                    companies.add(company);
+                }
             }
             ListAdapter listAdapter = new ListAdapterCompanies(this, companies);
             setListAdapter(listAdapter);

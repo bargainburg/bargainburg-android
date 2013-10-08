@@ -77,11 +77,11 @@ public class BargainBurgApi {
 
     public CompanyResponse getCompaniesForCategory(int id) throws Exception {
         String url = BACKEND_URL_CATEGORIES + id;
-        Log.d("API", url);
-        Type type = new TypeToken<List<Merchant>>() {
-        }.getType();
+//        Log.d("API", url);
+//        Type type = new TypeToken<List<Merchant>>() {
+//        }.getType();
         CompanyResponse response = new CompanyResponse();
-        response.companies = get(url, type);
+        response.company = get(url, Merchant.class);
         return response;
     }
 
