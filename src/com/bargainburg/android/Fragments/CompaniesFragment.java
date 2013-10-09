@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Merchant;
+import com.bargainburg.android.Activities.CompanyDetailActivity;
 import com.bargainburg.android.Adapters.ListAdapterCompanies;
 import com.bargainburg.android.Otto.BusProvider;
 import com.bargainburg.android.Otto.Events.CompanyEvent;
 import com.bargainburg.android.R;
+import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
+import com.google.gson.Gson;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -58,6 +62,15 @@ public class CompaniesFragment extends RoboSherlockListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Injection occurs in onViewCreated
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Merchant company = ((ListAdapterCompanies)getListAdapter()).getItem(position);
+        Intent intent = new Intent(getActivity(), CompanyDetailActivity.class);
+        intent.putExtra(EX.ITEM, new Gson().toJson(company));
+        startActivity(intent);
     }
 
     @Subscribe
