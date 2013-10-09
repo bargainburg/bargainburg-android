@@ -21,6 +21,7 @@
         </intent-filter>
     </activity>
     <activity android:name=".Activities.CategoryListActivity"/>
+    <activity android:name=".Activities.CompanyDetailActivity"/>
     <service
                 android:name=".API.APIService"/>
   </application>

@@ -3,7 +3,9 @@ package com.bargainburg.android.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.Adapters.ListAdapterCompanies;
@@ -12,6 +14,7 @@ import com.bargainburg.android.Otto.Events.CompanyEvent;
 import com.bargainburg.android.R;
 import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockListActivity;
+import com.google.gson.Gson;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -54,6 +57,15 @@ public class CategoryListActivity extends RoboSherlockListActivity {
     public void onPause() {
         super.onPause();
         BusProvider.getInstance().unregister(this);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Merchant company = ((ListAdapterCompanies)getListAdapter()).getItem(position);
+        Intent intent = new Intent(this, CompanyDetailActivity.class);
+        intent.putExtra(EX.ITEM, new Gson().toJson(company));
+        startActivity(intent);
     }
 
     @Subscribe
