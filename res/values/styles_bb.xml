@@ -33,11 +33,18 @@
         
     </style>
 
+
     <style name="ActionBar.Solid.Bb" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_bb</item>
+        <item name="android:titleTextStyle">@style/ActionBar.Solid.Bb.TitleTextStyle</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_bb</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_bb</item>
         <item name="progressBarStyle">@style/ProgressBar.Bb</item>
+    </style>
+
+    <style name="ActionBar.Solid.Bb.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="background">@drawable/ab_solid_bb</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="ActionBar.Transparent.Bb" parent="@style/Widget.Sherlock.Light.ActionBar">
