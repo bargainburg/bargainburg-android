@@ -18,7 +18,7 @@ import roboguice.inject.InjectView;
 public class CompanyDetailActivity extends RoboSherlockActivity {
 
     Merchant company;
-    @InjectView(R.id.text)TextView textView;
+    @InjectView(R.id.phone_number_tv)TextView phoneNumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class CompanyDetailActivity extends RoboSherlockActivity {
         }
         company = new Gson().fromJson(savedInstanceState.getString(EX.ITEM), Merchant.class);
         getSupportActionBar().setTitle(company.name);
-        textView.setText(company.updatedDate);
+        phoneNumber.setText(company.phone);
     }
 
 }

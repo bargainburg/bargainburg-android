@@ -29,6 +29,7 @@ public class BargainBurgApi {
 
     public static final String BACKEND_URL_CATEGORIES = "http://api.bargainburg.co/v1/categories/";
     public static final String BACKEND_URL_COMPANIES = "http://api.bargainburg.co/v1/merchants/";
+    public static final String SEARCH_URL = "http://api.bargainburg.co/v1/search?";
     public static final String MERCHANTS = "merchants";
 
     private Datastore mDataStore;
