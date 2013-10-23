@@ -46,7 +46,6 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("API", "pausing");
         BusProvider.getInstance().unregister(this);
     }
 

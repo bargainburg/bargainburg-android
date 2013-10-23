@@ -13,5 +13,5 @@ public class EX {
     public static final String ARRAY = "arraylist";
     public static final String ID = "itemID";
     public static final String PRICE = "$";
-
+    public static final String QUERY = "query";
 }

@@ -3,9 +3,11 @@ package com.bargainburg.android.API;
 import android.util.Log;
 import com.bargainburg.android.API.Model.Category;
 import com.bargainburg.android.API.Model.Merchant;
+import com.bargainburg.android.API.Model.Search;
 import com.bargainburg.android.API.Responses.CategoryResponse;
 import com.bargainburg.android.API.Responses.CompaniesResponse;
 import com.bargainburg.android.API.Responses.CompanyResponse;
+import com.bargainburg.android.API.Responses.SearchResponse;
 import com.bargainburg.android.Data.Datastore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,7 +32,7 @@ public class BargainBurgApi {
 
     public static final String BACKEND_URL_CATEGORIES = "http://api.bargainburg.co/v1/categories/";
     public static final String BACKEND_URL_COMPANIES = "http://api.bargainburg.co/v1/merchants/";
-    public static final String SEARCH_URL = "http://api.bargainburg.co/v1/search?";
+    public static final String SEARCH_URL = "http://api.bargainburg.co/v1/search?query=";
     public static final String MERCHANTS = "merchants";
     public static final String EXPAND_COUPONS = "?expand_coupons=1";
 
@@ -67,6 +69,15 @@ public class BargainBurgApi {
         } finally {
             if (in != null) in.close();
         }
+    }
+
+    public SearchResponse search(String query) throws Exception {
+        String url = SEARCH_URL + query;
+        Type type = new TypeToken<List<Search>>() {
+        }.getType();
+        SearchResponse response = new SearchResponse();
+        response.results = get(url, type);
+        return response;
     }
 
     public CategoryResponse getCategories() throws Exception {

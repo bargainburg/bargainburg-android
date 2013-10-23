@@ -11,6 +11,7 @@
                   android:id="@+id/searchText"
                   android:layout_width="0dp"
                   android:layout_weight="3"
+                  android:maxLines="1"
                   android:hint="Edit search terms here!"/>
         <Button
                 android:id="@+id/searchButton"
@@ -19,12 +20,10 @@
                 android:layout_weight="1"
                 android:text="Search"/>
     </LinearLayout>
-    <LinearLayout
-            style="@style/FillWidth">
-        <TextView
-                android:id="@+id/searchResults"
-                android:padding="12dp"
-                style="@style/FillWidth"
-                android:text="Search results appear here"/>
-    </LinearLayout>
+    <ListView
+            android:id="@id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:drawSelectorOnTop="false"/>
 </LinearLayout>
