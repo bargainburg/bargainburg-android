@@ -21,6 +21,9 @@
         android:layout_weight="1">
         <LinearLayout
             style="@style/CompanyDetailLayout">
+            <ImageView
+                    style="@style/CompanyDetailImage"
+                    android:background="@android:drawable/ic_menu_call"/>
             <TextView
                 style="@style/CompanyDetail"
                 android:text="Phone: "/>
@@ -31,6 +34,9 @@
         </LinearLayout>
         <LinearLayout
                 style="@style/CompanyDetailLayout">
+            <ImageView
+                    style="@style/CompanyDetailImage"
+                    android:background="@android:drawable/ic_dialog_email"/>
             <TextView
                     style="@style/CompanyDetail"
                     android:text="Email: "/>
@@ -41,6 +47,9 @@
         </LinearLayout>
         <LinearLayout
                 style="@style/CompanyDetailLayout">
+            <ImageView
+                style="@style/CompanyDetailImage"
+                android:background="@android:drawable/ic_menu_today"/>
             <TextView
                     style="@style/CompanyDetail"
                     android:text="Hours: "/>
@@ -51,6 +60,9 @@
         </LinearLayout>
         <LinearLayout
                 style="@style/CompanyDetailLayout">
+            <ImageView
+                    style="@style/CompanyDetailImage"
+                    android:background="@drawable/ic_price_tag"/>
             <TextView
                     style="@style/CompanyDetail"
                     android:text="Price: "/>
@@ -60,6 +72,14 @@
                     android:id="@+id/price_tv"/>
         </LinearLayout>
     </LinearLayout>
+    <TextView
+            android:text="Coupons"
+            android:paddingTop="10dp"
+            android:textColor="#000000"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
     <ListView
             android:id="@id/android:list"
             android:layout_width="match_parent"

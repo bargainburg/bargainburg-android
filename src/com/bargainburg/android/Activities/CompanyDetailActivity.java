@@ -30,6 +30,9 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
 
     Merchant company;
     @InjectView(R.id.phone_number_tv)TextView phoneNumber;
+    @InjectView(R.id.email_tv)TextView email;
+    @InjectView(R.id.hours_tv)TextView hours;
+    @InjectView(R.id.price_tv)TextView price;
 
     ArrayList<Coupon> coupons = new ArrayList<Coupon>();
 
