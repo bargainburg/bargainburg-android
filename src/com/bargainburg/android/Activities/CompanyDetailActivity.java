@@ -1,9 +1,13 @@
 package com.bargainburg.android.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Coupon;
@@ -76,6 +80,19 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         BusProvider.getInstance().unregister(this);
     }
 
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        new AlertDialog.Builder(this).setTitle(coupons.get(position).name)
+                .setMessage(coupons.get(position).description)
+                .setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+    }
 
     @Subscribe
     public void getCompany(CompanyEvent companyEvent) {
