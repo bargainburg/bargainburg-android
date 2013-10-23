@@ -12,5 +12,6 @@ public class EX {
     public static final String ITEM2 = "item2";
     public static final String ARRAY = "arraylist";
     public static final String ID = "itemID";
+    public static final String PRICE = "$";
 
 }

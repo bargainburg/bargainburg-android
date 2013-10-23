@@ -44,6 +44,18 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
             savedInstanceState = getIntent().getExtras();
         }
         company = new Gson().fromJson(savedInstanceState.getString(EX.ITEM), Merchant.class);
+        phoneNumber.setText(company.phone);
+        email.setText(company.email);
+        hours.setText(company.hours);
+        if (company.priceRange == 1) {
+            price.setText(EX.PRICE);
+        } else if (company.priceRange == 2) {
+            price.setText("" + EX.PRICE + EX.PRICE);
+        } else if (company.priceRange == 3) {
+            price.setText("" + EX.PRICE + EX.PRICE + EX.PRICE);
+        } else {
+            price.setText("" + EX.PRICE + EX.PRICE + EX.PRICE + EX.PRICE);
+        }
         Intent intent = new Intent(this, APIService.class);
         intent.putExtra(APIService.API_CALL, APIService.GET_COMPANY_COUPONS);
         intent.putExtra(EX.ID, company.id);

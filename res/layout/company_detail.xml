@@ -6,27 +6,27 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:text="Company Information"/>
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:text="Company Information"/>
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:background="#428bca"
-        android:layout_weight="1">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:background="#428bca"
+            android:layout_weight="1">
         <LinearLayout
-            style="@style/CompanyDetailLayout">
+                style="@style/CompanyDetailLayout">
             <ImageView
                     style="@style/CompanyDetailImage"
                     android:background="@android:drawable/ic_menu_call"/>
             <TextView
-                style="@style/CompanyDetail"
-                android:text="Phone: "/>
+                    style="@style/CompanyDetail"
+                    android:text="Phone: "/>
             <TextView
                     style="@style/CompanyDetail"
                     android:text="800-000-0000"
@@ -48,8 +48,8 @@
         <LinearLayout
                 style="@style/CompanyDetailLayout">
             <ImageView
-                style="@style/CompanyDetailImage"
-                android:background="@android:drawable/ic_menu_today"/>
+                    style="@style/CompanyDetailImage"
+                    android:background="@android:drawable/ic_menu_today"/>
             <TextView
                     style="@style/CompanyDetail"
                     android:text="Hours: "/>
