@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import com.bargainburg.android.API.Responses.BaseResponse;
 import com.bargainburg.android.API.Responses.CategoryResponse;
+import com.bargainburg.android.API.Responses.CompaniesResponse;
 import com.bargainburg.android.API.Responses.CompanyResponse;
 import com.bargainburg.android.Data.Datastore;
 import com.bargainburg.android.Otto.BusProvider;
 import com.bargainburg.android.Otto.Events.CategoryEvent;
+import com.bargainburg.android.Otto.Events.CompaniesEvent;
 import com.bargainburg.android.Otto.Events.CompanyEvent;
 import com.bargainburg.android.Util.EX;
 import com.google.gson.Gson;
@@ -30,6 +32,7 @@ public class APIService extends RoboIntentService {
     public static final int GET_COMPANIES = 0x02;
     public static final int GET_COUPONS = 0x03;
     public static final int GET_COMPANIES_FOR_CATEGORY = 0x04;
+    public static final int GET_COMPANY_COUPONS = 0x05;
 
     private Gson mGson = new Gson();
 
@@ -45,6 +48,7 @@ public class APIService extends RoboIntentService {
         Log.d("API", "handling intent");
         Bundle extras = intent.getExtras();
         int apiCall = extras.getInt(API_CALL, -1);
+        int id = 0;
         switch (apiCall) {
             case GET_CATEGORIES:
                 getCategories(extras);
@@ -53,8 +57,12 @@ public class APIService extends RoboIntentService {
                 getCompanies(extras);
                 break;
             case GET_COMPANIES_FOR_CATEGORY:
-                int id = extras.getInt(EX.ID, 1);
+                id = extras.getInt(EX.ID, 1);
                 getCompaniesForCategory(id);
+                break;
+            case GET_COMPANY_COUPONS:
+                id = extras.getInt(EX.ID, 1);
+                getCompanyWithCoupons(id);
                 break;
 //            case GET_COUPONS:
 //                getCoupons(extras);
@@ -81,10 +89,10 @@ public class APIService extends RoboIntentService {
         BusProvider.getInstance().post(new CategoryEvent((CategoryResponse) response));
     }
 
-    private void getCompaniesForCategory(int id) {
+    private void getCompanyWithCoupons(int id) {
         BaseResponse response;
         try {
-            response = mBargainBurgApi.getCompaniesForCategory(id);
+            response = mBargainBurgApi.getCompanyWithCoupons(id);
             response.success = true;
             response.error = false;
         } catch (Exception e) {
@@ -95,6 +103,20 @@ public class APIService extends RoboIntentService {
         } BusProvider.getInstance().post(new CompanyEvent((CompanyResponse)response));
     }
 
+    private void getCompaniesForCategory(int id) {
+        BaseResponse response;
+        try {
+            response = mBargainBurgApi.getCompaniesForCategory(id);
+            response.success = true;
+            response.error = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = new CompaniesResponse();
+            response.success = false;
+            response.error = true;
+        } BusProvider.getInstance().post(new CompaniesEvent((CompaniesResponse)response));
+    }
+
     private void getCompanies(Bundle data) {
         BaseResponse response;
         try {
@@ -103,11 +125,11 @@ public class APIService extends RoboIntentService {
             response.error = false;
         } catch (Exception e) {
             e.printStackTrace();
-            response = new CompanyResponse();
+            response = new CompaniesResponse();
             response.success = false;
             response.error = true;
         }
-        BusProvider.getInstance().post(new CompanyEvent((CompanyResponse)response));
+        BusProvider.getInstance().post(new CompaniesEvent((CompaniesResponse)response));
     }
 
 }

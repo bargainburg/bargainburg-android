@@ -13,7 +13,7 @@ import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.Activities.CompanyDetailActivity;
 import com.bargainburg.android.Adapters.ListAdapterCompanies;
 import com.bargainburg.android.Otto.BusProvider;
-import com.bargainburg.android.Otto.Events.CompanyEvent;
+import com.bargainburg.android.Otto.Events.CompaniesEvent;
 import com.bargainburg.android.R;
 import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
@@ -74,11 +74,11 @@ public class CompaniesFragment extends RoboSherlockListFragment {
     }
 
     @Subscribe
-    public void getCompanies(CompanyEvent companyEvent) {
-        if (companyEvent.response.success) {
+    public void getCompanies(CompaniesEvent companiesEvent) {
+        if (companiesEvent.response.success) {
             companies = new ArrayList<Merchant>();
-            Log.d("API", "success!" + companyEvent.response.companies.get(0).name);
-            for (Merchant company : companyEvent.response.companies) {
+            Log.d("API", "success!" + companiesEvent.response.companies.get(0).name);
+            for (Merchant company : companiesEvent.response.companies) {
                 Log.d("API", company.name);
                 companies.add(company);
             }

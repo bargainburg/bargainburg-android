@@ -4,6 +4,7 @@ import android.util.Log;
 import com.bargainburg.android.API.Model.Category;
 import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.API.Responses.CategoryResponse;
+import com.bargainburg.android.API.Responses.CompaniesResponse;
 import com.bargainburg.android.API.Responses.CompanyResponse;
 import com.bargainburg.android.Data.Datastore;
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ public class BargainBurgApi {
     public static final String BACKEND_URL_COMPANIES = "http://api.bargainburg.co/v1/merchants/";
     public static final String SEARCH_URL = "http://api.bargainburg.co/v1/search?";
     public static final String MERCHANTS = "merchants";
+    public static final String EXPAND_COUPONS = "?expand_coupons=1";
 
     private Datastore mDataStore;
     private OkHttpClient mOkHttpClient;
@@ -77,22 +79,29 @@ public class BargainBurgApi {
         return response;
     }
 
-    public CompanyResponse getCompaniesForCategory(int id) throws Exception {
+    public CompaniesResponse getCompaniesForCategory(int id) throws Exception {
         String url = BACKEND_URL_CATEGORIES + id + "/" + MERCHANTS;
         Log.d("API", url);
         Type type = new TypeToken<List<Merchant>>() {
         }.getType();
-        CompanyResponse response = new CompanyResponse();
+        CompaniesResponse response = new CompaniesResponse();
         response.companies = get(url, type);
         return response;
     }
 
-    public CompanyResponse getCompanies() throws Exception {
+    public CompaniesResponse getCompanies() throws Exception {
         String url = BACKEND_URL_COMPANIES;
         Type type = new TypeToken<List<Merchant>>() {
         }.getType();
-        CompanyResponse response = new CompanyResponse();
+        CompaniesResponse response = new CompaniesResponse();
         response.companies = get(url, type);
+        return response;
+    }
+
+    public CompanyResponse getCompanyWithCoupons(int id) throws Exception {
+        String url = BACKEND_URL_COMPANIES + "" + id + EXPAND_COUPONS;
+        CompanyResponse response = new CompanyResponse();
+        response.company = get(url, Merchant.class);
         return response;
     }
 }

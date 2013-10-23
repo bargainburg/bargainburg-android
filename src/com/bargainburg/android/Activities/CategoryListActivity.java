@@ -10,7 +10,7 @@ import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.Adapters.ListAdapterCompanies;
 import com.bargainburg.android.Otto.BusProvider;
-import com.bargainburg.android.Otto.Events.CompanyEvent;
+import com.bargainburg.android.Otto.Events.CompaniesEvent;
 import com.bargainburg.android.R;
 import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockListActivity;
@@ -69,10 +69,10 @@ public class CategoryListActivity extends RoboSherlockListActivity {
     }
 
     @Subscribe
-    public void getCompanies(CompanyEvent companyEvent) {
-        if (companyEvent.response.success) {
+    public void getCompanies(CompaniesEvent companiesEvent) {
+        if (companiesEvent.response.success) {
         companies = new ArrayList<Merchant>();
-        for (Merchant company : companyEvent.response.companies) {
+        for (Merchant company : companiesEvent.response.companies) {
             companies.add(company);
         }
         ListAdapter listAdapter = new ListAdapterCompanies(this, companies);

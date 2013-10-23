@@ -2,6 +2,8 @@ package com.bargainburg.android.API.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: christhoma
@@ -28,4 +30,5 @@ public class Merchant {
     public int categoryId;
     @SerializedName("user_id")
     public int userId;
+    public ArrayList<Coupon> coupons;
 }
