@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import com.bargainburg.android.API.APIService;
@@ -31,6 +32,8 @@ public class SearchFragment extends RoboSherlockListFragment {
     TextView searchText;
     @InjectView(R.id.searchButton)
     TextView searchButton;
+    @InjectView(R.id.busy_view)
+    FrameLayout busy_view;
 
     ArrayList<Search> searchResults = new ArrayList<Search>();
 
@@ -73,6 +76,7 @@ public class SearchFragment extends RoboSherlockListFragment {
                     intent.putExtra(APIService.API_CALL, APIService.SEARCH);
                     intent.putExtra(EX.QUERY, s.toString());
                     getActivity().startService(intent);
+                    busy_view.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -84,6 +88,7 @@ public class SearchFragment extends RoboSherlockListFragment {
                 intent.putExtra(APIService.API_CALL, APIService.SEARCH);
                 intent.putExtra(EX.QUERY, query);
                 getActivity().startService(intent);
+                busy_view.setVisibility(View.VISIBLE);
             }
         });
         //Injection occurs in onViewCreated
@@ -92,6 +97,7 @@ public class SearchFragment extends RoboSherlockListFragment {
     @Subscribe
     public void searchResults(SearchEvent searchEvent) {
         if (searchEvent.response.results != null) {
+            busy_view.setVisibility(View.GONE);
             searchResults = new ArrayList<Search>();
             for (Search search : searchEvent.response.results) {
                 searchResults.add(search);

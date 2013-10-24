@@ -12,11 +12,9 @@
             android:layout_weight="1"
             android:drawSelectorOnTop="false"/>
     <TextView
-        style="@style/FillWidth"
-        android:text="No companies available at the moment."
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:id="@+id/nothing_available_text"
-        android:visibility="gone"/>
-    <include layout="@layout/busy_view"/>
+            style="@style/FillWidth"
+            android:text="No companies available at the moment"
+            android:padding="10dp"
+            android:id="@+id/nothing_available_text"
+            android:visibility="gone"/>
 </LinearLayout>

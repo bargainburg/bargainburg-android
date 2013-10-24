@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import com.bargainburg.android.API.APIService;
@@ -21,6 +22,7 @@ import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
 import com.google.gson.Gson;
 import com.squareup.otto.Subscribe;
+import roboguice.inject.InjectView;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,8 @@ public class CompaniesFragment extends RoboSherlockListFragment {
 
     ArrayList<Merchant> companies = new ArrayList<Merchant>();
     AlertDialog dialog;
+    @InjectView(R.id.busy_view)
+    FrameLayout busy_view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,7 @@ public class CompaniesFragment extends RoboSherlockListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        busy_view.setVisibility(View.VISIBLE);
         //Injection occurs in onViewCreated
     }
 
@@ -82,6 +87,7 @@ public class CompaniesFragment extends RoboSherlockListFragment {
     @Subscribe
     public void getCompanies(CompaniesEvent companiesEvent) {
         if (companiesEvent.response.companies != null) {
+            busy_view.setVisibility(View.GONE);
             dialog.dismiss();
             companies = new ArrayList<Merchant>();
             Log.d("API", "success!" + companiesEvent.response.companies.get(0).name);

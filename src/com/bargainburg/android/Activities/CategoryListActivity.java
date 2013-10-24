@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +41,8 @@ public class CategoryListActivity extends RoboSherlockListActivity {
 
     @InjectView (R.id.nothing_available_text)
     TextView nothingAvailable;
+    @InjectView(R.id.busy_view)
+    FrameLayout busy_view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,8 +61,10 @@ public class CategoryListActivity extends RoboSherlockListActivity {
         intent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES_FOR_CATEGORY);
         intent.putExtra(EX.ID, id);
         startService(intent);
+
         dialog = new AlertDialog.Builder(this).create();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        busy_view.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -97,6 +102,7 @@ public class CategoryListActivity extends RoboSherlockListActivity {
     @Subscribe
     public void getCompanies(CompaniesEvent companiesEvent) {
         if (companiesEvent.response.companies != null) {
+            busy_view.setVisibility(View.GONE);
             getListView().setVisibility(View.VISIBLE);
             nothingAvailable.setVisibility(View.GONE);
             companies = new ArrayList<Merchant>();

@@ -26,4 +26,5 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:drawSelectorOnTop="false"/>
+    <include layout="@layout/busy_view"/>
 </LinearLayout>

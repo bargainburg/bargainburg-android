@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import com.bargainburg.android.API.APIService;
@@ -20,6 +21,7 @@ import com.bargainburg.android.R;
 import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
 import com.squareup.otto.Subscribe;
+import roboguice.inject.InjectView;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,8 @@ public class CategoriesFragment extends RoboSherlockListFragment {
 
     ArrayList<Category> categories = new ArrayList<Category>();
     AlertDialog dialog;
-
+    @InjectView (R.id.busy_view)
+    FrameLayout busy_view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        busy_view.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -79,6 +83,7 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Subscribe
     public void getCategories(CategoryEvent categoryEvent) {
         if (categoryEvent.response.categories != null) {
+            busy_view.setVisibility(View.GONE);
             dialog.dismiss();
             categories = new ArrayList<Category>();
             for (Category category : categoryEvent.response.categories) {
