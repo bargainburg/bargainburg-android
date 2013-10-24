@@ -30,4 +30,11 @@
         <item name = "android:layout_width">15dp</item>
         <item name = "android:gravity">center_vertical</item>
     </style>
+    <style name="WhiteDivider">
+        <item name = "android:paddingLeft">10dp</item>
+        <item name = "android:paddingRight">10dp</item>
+        <item name = "android:layout_height">1dp</item>
+        <item name ="android:layout_width">match_parent</item>
+        <item name ="android:background">#ffffff</item>
+    </style>
 </resources>

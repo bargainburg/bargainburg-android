@@ -32,6 +32,8 @@
                     android:text="800-000-0000"
                     android:id="@+id/phone_number_tv"/>
         </LinearLayout>
+        <View
+                style="@style/WhiteDivider"/>
         <LinearLayout
                 style="@style/CompanyDetailLayout">
             <ImageView
@@ -45,6 +47,8 @@
                     android:text="testlongtesttestlongtest@test.com"
                     android:id="@+id/email_tv"/>
         </LinearLayout>
+        <View
+                style="@style/WhiteDivider"/>
         <LinearLayout
                 style="@style/CompanyDetailLayout">
             <ImageView
@@ -58,6 +62,8 @@
                     android:text="M-F 9-5"
                     android:id="@+id/hours_tv"/>
         </LinearLayout>
+        <View
+                style="@style/WhiteDivider"/>
         <LinearLayout
                 style="@style/CompanyDetailLayout">
             <ImageView

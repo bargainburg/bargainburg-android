@@ -5,9 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <TextView
-            android:background="@drawable/abs__list_selector_holo_light"
             android:padding="14dp"
-
             android:id="@+id/list_item_text"
             android:text="okay"
             android:layout_width="match_parent"
