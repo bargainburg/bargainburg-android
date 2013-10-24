@@ -1,5 +1,7 @@
 package com.bargainburg.android.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 public class CompaniesFragment extends RoboSherlockListFragment {
 
     ArrayList<Merchant> companies = new ArrayList<Merchant>();
+    AlertDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class CompaniesFragment extends RoboSherlockListFragment {
         getActivity().startService(intent);
         ListAdapter listAdapter = new ListAdapterCompanies(getActivity(), companies);
         setListAdapter(listAdapter);
+        dialog = new AlertDialog.Builder(getActivity()).create();
     }
 
     @Override
@@ -75,7 +79,8 @@ public class CompaniesFragment extends RoboSherlockListFragment {
 
     @Subscribe
     public void getCompanies(CompaniesEvent companiesEvent) {
-        if (companiesEvent.response.success) {
+        if (companiesEvent.response.companies != null) {
+            dialog.dismiss();
             companies = new ArrayList<Merchant>();
             Log.d("API", "success!" + companiesEvent.response.companies.get(0).name);
             for (Merchant company : companiesEvent.response.companies) {
@@ -85,7 +90,27 @@ public class CompaniesFragment extends RoboSherlockListFragment {
             ListAdapter listAdapter = new ListAdapterCompanies(getActivity(), companies);
             setListAdapter(listAdapter);
         } else {
-            Log.d("API", "failure!");
+            dialog = new AlertDialog.Builder(getActivity()).setTitle("Error")
+                    .setMessage("It seems there was an error retrieving the list of companies! Would you like to load them again?")
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getActivity(), APIService.class);
+                            intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
+                            getActivity().startService(intent);
+                            Intent nintent = new Intent(getActivity(), APIService.class);
+                            nintent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES);
+                            getActivity().startService(nintent);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create();
+            dialog.show();
         }
     }
 }
