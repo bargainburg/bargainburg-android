@@ -1,5 +1,6 @@
 package com.bargainburg.android.Activities;
 
+import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import com.actionbarsherlock.app.ActionBar;
 import com.bargainburg.android.Fragments.CategoriesFragment;
 import com.bargainburg.android.Fragments.CompaniesFragment;
@@ -54,7 +56,10 @@ public class StartupActivity extends RoboSherlockFragmentActivity implements Act
     }
 
     @Override
-    public void onPageScrolled(int i, float v, int i1) {}
+    public void onPageScrolled(int i, float v, int i1) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(pager.getWindowToken(), 0);
+    }
 
     @Override
     public void onPageSelected(int i) {
@@ -92,6 +97,8 @@ public class StartupActivity extends RoboSherlockFragmentActivity implements Act
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(pager.getWindowToken(), 0);
         pager.setCurrentItem(tab.getPosition());
     }
 

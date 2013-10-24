@@ -68,10 +68,12 @@ public class SearchFragment extends RoboSherlockListFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Intent intent = new Intent(getActivity(), APIService.class);
-                intent.putExtra(APIService.API_CALL, APIService.SEARCH);
-                intent.putExtra(EX.QUERY, s.toString());
-                getActivity().startService(intent);
+                if (s.toString().length() > 0) {
+                    Intent intent = new Intent(getActivity(), APIService.class);
+                    intent.putExtra(APIService.API_CALL, APIService.SEARCH);
+                    intent.putExtra(EX.QUERY, s.toString());
+                    getActivity().startService(intent);
+                }
             }
         });
         searchButton.setOnClickListener(new View.OnClickListener() {
