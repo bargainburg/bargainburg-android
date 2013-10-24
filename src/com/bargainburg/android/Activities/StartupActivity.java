@@ -41,7 +41,9 @@ public class StartupActivity extends RoboSherlockFragmentActivity implements Act
         pager.setAdapter(new OakAdapter(getSupportFragmentManager()));
         pager.setOnPageChangeListener(this);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        pager.setOffscreenPageLimit(2-=);
     }
+
 
     @Override
     public void onResume() {
@@ -77,7 +79,8 @@ public class StartupActivity extends RoboSherlockFragmentActivity implements Act
 
         @Override
         public Fragment getItem(int i) {
-            return Fragment.instantiate(StartupActivity.this, bar.getTabAt(i).getTag().toString(), null);
+            Fragment frag = Fragment.instantiate(StartupActivity.this, bar.getTabAt(i).getTag().toString(), null);
+            return frag;
         }
 
         @Override

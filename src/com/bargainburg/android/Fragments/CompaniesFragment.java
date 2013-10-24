@@ -49,14 +49,14 @@ public class CompaniesFragment extends RoboSherlockListFragment {
             intent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES);
             getActivity().startService(intent);
         }
-        Log.d("API", "resume");
+        Log.d("API", "resume comp");
         BusProvider.getInstance().register(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("API", "pausing");
+        Log.d("API", "pausing comp");
         BusProvider.getInstance().unregister(this);
     }
 

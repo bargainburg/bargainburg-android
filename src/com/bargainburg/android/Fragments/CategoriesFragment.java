@@ -44,6 +44,7 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("API", "resume cate");
         if (categories.size() == 0) {
             Intent intent = new Intent(getActivity(), APIService.class);
             intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
@@ -55,6 +56,7 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onPause() {
         super.onPause();
+        Log.d("API", "pause cate");
         BusProvider.getInstance().unregister(this);
     }
 
@@ -67,7 +69,9 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        busy_view.setVisibility(View.VISIBLE);
+        if (categories.size() == 0) {
+            busy_view.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
