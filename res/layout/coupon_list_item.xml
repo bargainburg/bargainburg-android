@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:text="test Coupon goes here"
-        android:gravity="center_vertical"
         android:id="@+id/coupon_text"/>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.bargainburg.android.Activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
     @InjectView(R.id.email_tv)TextView email;
     @InjectView(R.id.hours_tv)TextView hours;
     @InjectView(R.id.price_tv)TextView price;
+    Context context;
+    AlertDialog dialog;
 
     ArrayList<Coupon> coupons = new ArrayList<Coupon>();
 
@@ -48,6 +51,7 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         if (savedInstanceState == null) {
             savedInstanceState = getIntent().getExtras();
         }
+        context = this;
         company = new Gson().fromJson(savedInstanceState.getString(EX.ITEM), Merchant.class);
         phoneNumber.setText(company.phone);
         email.setText(company.email);
@@ -67,6 +71,7 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         startService(intent);
         getSupportActionBar().setTitle(company.name);
         phoneNumber.setText(company.phone);
+        dialog = new AlertDialog.Builder(this).create();
     }
 
     @Override
@@ -92,7 +97,8 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
 
     @Subscribe
     public void getCompany(CompanyEvent companyEvent) {
-        if (companyEvent.response.success) {
+        if (companyEvent.response.company != null) {
+            dialog.dismiss();
             company = companyEvent.response.company;
             Log.d("API", "success!" + company.name);
             coupons = new ArrayList<Coupon>();
@@ -103,13 +109,31 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
             ListAdapter listAdapter = new ListAdapterCoupons(this, coupons);
             setListAdapter(listAdapter);
         } else {
-            Log.d("API", "failure!");
+            dialog = new AlertDialog.Builder(this).setTitle("Error")
+                    .setMessage("It seems there was an error retrieving the list of coupons! Would you like to load them again?")
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(context, APIService.class);
+                            intent.putExtra(APIService.API_CALL, APIService.GET_COMPANY_COUPONS);
+                            intent.putExtra(EX.ID, company.id);
+                            startService(intent);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create();
+            dialog.show();
         }
     }
 
     @Subscribe
     public void getCoupon(CouponEvent couponEvent) {
-        if (couponEvent.response.success) {
+        if (couponEvent.response.coupon != null) {
             new AlertDialog.Builder(this).setTitle(couponEvent.response.coupon.name)
                     .setMessage(couponEvent.response.coupon.description)
                     .setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
@@ -119,6 +143,17 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
                         }
                     })
                     .create().show();
+        } else {
+            dialog = new AlertDialog.Builder(this).setTitle("Error")
+                    .setMessage("It seems there was an error retrieving the coupon.")
+                    .setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create();
+            dialog.show();
         }
     }
 
