@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * User: christhoma
  * Date: 8/12/13
  * Time: 3:36 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ListAdapterCategories extends BaseAdapter {
     ArrayList<Category> items = new ArrayList<Category>();

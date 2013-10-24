@@ -16,5 +16,4 @@
         android:paddingLeft="10dp"
         android:text="test Coupon goes here"
         android:id="@+id/coupon_text"/>
-
 </LinearLayout>

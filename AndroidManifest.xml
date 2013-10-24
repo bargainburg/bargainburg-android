@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.bargainburg.android" android:versionCode="1" android:versionName="1.0-SNAPSHOT">
+          package="com.bargainburg.android" android:versionCode="1" android:versionName="1.0-SNAPSHOT">
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
 
@@ -9,22 +9,25 @@
 
 
     <application
-	  android:name=".MainApp"
-	  android:icon="@drawable/ic_launcher"
-      android:label="@string/app_name"
-      android:theme="@style/Theme.Bb">
-    <activity android:name=".Activities.StartupActivity"
-              android:label="Bargain Burg">
-        <intent-filter android:label="@string/app_name">
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity android:name=".Activities.CategoryListActivity"/>
-    <activity android:name=".Activities.CompanyDetailActivity"/>
-    <service
+            android:name=".MainApp"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Bb">
+        <activity android:name=".Activities.StartupActivity"
+                  android:label="Bargain Burg">
+
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.CategoryListActivity"
+                  android:parentActivityName=".Activities.StartupActivity"/>
+        <activity android:name=".Activities.CompanyDetailActivity"
+                  android:parentActivityName=".Activities.StartupActivity"/>
+        <service
                 android:name=".API.APIService"/>
-  </application>
+    </application>
 
 </manifest>
 
