@@ -111,8 +111,8 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Subscribe
     public void getCategories(CategoryEvent categoryEvent) {
         categories = new ArrayList<Category>();
+        busy_view.setVisibility(View.GONE);
         if (categoryEvent.response.categories != null) {
-            busy_view.setVisibility(View.GONE);
             dialog.dismiss();
             categories = new ArrayList<Category>();
             for (Category category : categoryEvent.response.categories) {
@@ -120,27 +120,29 @@ public class CategoriesFragment extends RoboSherlockListFragment {
                 categories.add(category);
             }
         } else {
-            dialog = new AlertDialog.Builder(getActivity()).setTitle("Error")
-                    .setMessage("It seems there was an error retrieving the list of categories! Would you like to load them again?")
-                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(getActivity(), APIService.class);
-                            intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
-                            getActivity().startService(intent);
-                            Intent nintent = new Intent(getActivity(), APIService.class);
-                            nintent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES);
-                            getActivity().startService(nintent);
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .create();
-            dialog.show();
+            if (!dialog.isShowing()) {
+                dialog = new AlertDialog.Builder(getActivity()).setTitle("Error")
+                        .setMessage("It seems there was an error retrieving the list of companies and or categories! Would you like to load them again?")
+                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getActivity(), APIService.class);
+                                intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
+                                getActivity().startService(intent);
+                                Intent nintent = new Intent(getActivity(), APIService.class);
+                                nintent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES);
+                                getActivity().startService(nintent);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                dialog.show();
+            }
         }
         ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
         setListAdapter(listAdapter);
