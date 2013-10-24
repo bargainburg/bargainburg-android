@@ -99,6 +99,7 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         if (companyEvent.response.success) {
             company = companyEvent.response.company;
             Log.d("API", "success!" + company.name);
+            coupons = new ArrayList<Coupon>();
             for (Coupon coupon: company.coupons) {
                 Log.d("API", coupon.name);
                 coupons.add(coupon);

@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -72,7 +73,7 @@ public class BargainBurgApi {
     }
 
     public SearchResponse search(String query) throws Exception {
-        String url = SEARCH_URL + query;
+        String url = SEARCH_URL + URLEncoder.encode(query, "UTF-8");
         Type type = new TypeToken<List<Search>>() {
         }.getType();
         SearchResponse response = new SearchResponse();

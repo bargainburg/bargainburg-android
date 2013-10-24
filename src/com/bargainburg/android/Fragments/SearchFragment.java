@@ -29,6 +29,8 @@ public class SearchFragment extends RoboSherlockListFragment {
         private int customBlue;
     @InjectView(R.id.searchText)
     TextView searchText;
+    @InjectView(R.id.searchButton)
+    TextView searchButton;
 
     ArrayList<Search> searchResults = new ArrayList<Search>();
 
@@ -72,12 +74,22 @@ public class SearchFragment extends RoboSherlockListFragment {
                 getActivity().startService(intent);
             }
         });
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String query = searchText.getText().toString();
+                Intent intent = new Intent(getActivity(), APIService.class);
+                intent.putExtra(APIService.API_CALL, APIService.SEARCH);
+                intent.putExtra(EX.QUERY, query);
+                getActivity().startService(intent);
+            }
+        });
         //Injection occurs in onViewCreated
     }
 
     @Subscribe
     public void searchResults(SearchEvent searchEvent) {
-        if (searchEvent.response.success) {
+        if (searchEvent.response.results != null) {
             searchResults = new ArrayList<Search>();
             for (Search search : searchEvent.response.results) {
                 searchResults.add(search);
