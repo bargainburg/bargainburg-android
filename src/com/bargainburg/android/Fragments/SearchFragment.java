@@ -1,5 +1,7 @@
 package com.bargainburg.android.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,18 +9,18 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Search;
+import com.bargainburg.android.Activities.CompanyDetailActivity;
 import com.bargainburg.android.Adapters.ListAdapterSearch;
 import com.bargainburg.android.Otto.BusProvider;
+import com.bargainburg.android.Otto.Events.CouponEvent;
 import com.bargainburg.android.Otto.Events.SearchEvent;
 import com.bargainburg.android.R;
 import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockListFragment;
+import com.google.gson.Gson;
 import com.squareup.otto.Subscribe;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -36,7 +38,7 @@ public class SearchFragment extends RoboSherlockListFragment {
     @InjectView(R.id.busy_view)
     FrameLayout busy_view;
 
-
+    AlertDialog dialog;
 
     ArrayList<Search> searchResults = new ArrayList<Search>();
 
@@ -97,7 +99,21 @@ public class SearchFragment extends RoboSherlockListFragment {
         //Injection occurs in onViewCreated
     }
 
-
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Search searchItem = ((ListAdapterSearch)getListAdapter()).getItem(position);
+        if (searchItem.type.equals("coupon")) {
+            Intent intent = new Intent(getActivity(), APIService.class);
+            intent.putExtra(APIService.API_CALL, APIService.GET_COUPON);
+            intent.putExtra(EX.ID, searchItem.id);
+            getActivity().startService(intent);
+        } else {
+            Intent intent = new Intent(getActivity(), CompanyDetailActivity.class);
+            intent.putExtra(EX.ITEM, new Gson().toJson(searchItem));
+            startActivity(intent);
+        }
+    }
 
     @Subscribe
     public void searchResults(SearchEvent searchEvent) {
@@ -111,6 +127,32 @@ public class SearchFragment extends RoboSherlockListFragment {
             setListAdapter(listAdapter);
         } else {
             Toast.makeText(getActivity(), "Error retrieving search results, try again.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Subscribe
+    public void getCoupon(CouponEvent couponEvent) {
+        if (couponEvent.response.coupon != null) {
+            new AlertDialog.Builder(getActivity()).setTitle(couponEvent.response.coupon.name)
+                    .setMessage(couponEvent.response.coupon.description)
+                    .setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        } else {
+            dialog = new AlertDialog.Builder(getActivity()).setTitle("Error")
+                    .setMessage("It seems there was an error retrieving the coupon.")
+                    .setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create();
+            dialog.show();
         }
     }
 }
