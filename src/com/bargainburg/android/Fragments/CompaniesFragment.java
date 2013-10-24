@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.Activities.CompanyDetailActivity;
@@ -39,6 +42,7 @@ public class CompaniesFragment extends RoboSherlockListFragment {
         ListAdapter listAdapter = new ListAdapterCompanies(getActivity(), companies);
         setListAdapter(listAdapter);
         dialog = new AlertDialog.Builder(getActivity()).create();
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -84,19 +88,36 @@ public class CompaniesFragment extends RoboSherlockListFragment {
         startActivity(intent);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.refresh_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case R.id.refresh:
+                busy_view.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(getActivity(), APIService.class);
+                intent.putExtra(APIService.API_CALL, APIService.GET_COMPANIES);
+                getActivity().startService(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Subscribe
     public void getCompanies(CompaniesEvent companiesEvent) {
+        busy_view.setVisibility(View.GONE);
+        companies = new ArrayList<Merchant>();
         if (companiesEvent.response.companies != null) {
-            busy_view.setVisibility(View.GONE);
             dialog.dismiss();
-            companies = new ArrayList<Merchant>();
             Log.d("API", "success!" + companiesEvent.response.companies.get(0).name);
             for (Merchant company : companiesEvent.response.companies) {
                 Log.d("API", company.name);
                 companies.add(company);
             }
-            ListAdapter listAdapter = new ListAdapterCompanies(getActivity(), companies);
-            setListAdapter(listAdapter);
         } else {
             dialog = new AlertDialog.Builder(getActivity()).setTitle("Error")
                     .setMessage("It seems there was an error retrieving the list of companies! Would you like to load them again?")
@@ -120,5 +141,7 @@ public class CompaniesFragment extends RoboSherlockListFragment {
                     .create();
             dialog.show();
         }
+        ListAdapter listAdapter = new ListAdapterCompanies(getActivity(), companies);
+        setListAdapter(listAdapter);
     }
 }

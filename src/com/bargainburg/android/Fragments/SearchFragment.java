@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Search;
 import com.bargainburg.android.Adapters.ListAdapterSearch;
@@ -34,6 +35,8 @@ public class SearchFragment extends RoboSherlockListFragment {
     TextView searchButton;
     @InjectView(R.id.busy_view)
     FrameLayout busy_view;
+
+
 
     ArrayList<Search> searchResults = new ArrayList<Search>();
 
@@ -94,16 +97,20 @@ public class SearchFragment extends RoboSherlockListFragment {
         //Injection occurs in onViewCreated
     }
 
+
+
     @Subscribe
     public void searchResults(SearchEvent searchEvent) {
+        busy_view.setVisibility(View.GONE);
         if (searchEvent.response.results != null) {
-            busy_view.setVisibility(View.GONE);
             searchResults = new ArrayList<Search>();
             for (Search search : searchEvent.response.results) {
                 searchResults.add(search);
             }
             ListAdapter listAdapter = new ListAdapterSearch(getActivity(), searchResults);
             setListAdapter(listAdapter);
+        } else {
+            Toast.makeText(getActivity(), "Error retrieving search results, try again.", Toast.LENGTH_SHORT).show();
         }
     }
 }

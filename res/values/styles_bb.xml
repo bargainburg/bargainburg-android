@@ -29,8 +29,6 @@
         <item name="actionModeBackground">@drawable/cab_background_top_bb</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_bb</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Bb</item>
-
-        
     </style>
 
 

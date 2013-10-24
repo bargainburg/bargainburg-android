@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Category;
 import com.bargainburg.android.Activities.CategoryListActivity;
@@ -32,6 +35,7 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @InjectView (R.id.busy_view)
     FrameLayout busy_view;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,7 @@ public class CategoriesFragment extends RoboSherlockListFragment {
         ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
         setListAdapter(listAdapter);
         dialog = new AlertDialog.Builder(getActivity()).create();
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -84,8 +89,28 @@ public class CategoriesFragment extends RoboSherlockListFragment {
         getActivity().startActivity(intent);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.refresh_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case R.id.refresh:
+                busy_view.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(getActivity(), APIService.class);
+                intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
+                getActivity().startService(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Subscribe
     public void getCategories(CategoryEvent categoryEvent) {
+        categories = new ArrayList<Category>();
         if (categoryEvent.response.categories != null) {
             busy_view.setVisibility(View.GONE);
             dialog.dismiss();
@@ -94,8 +119,6 @@ public class CategoriesFragment extends RoboSherlockListFragment {
                 Log.d("API", category.name);
                 categories.add(category);
             }
-            ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
-            setListAdapter(listAdapter);
         } else {
             dialog = new AlertDialog.Builder(getActivity()).setTitle("Error")
                     .setMessage("It seems there was an error retrieving the list of categories! Would you like to load them again?")
@@ -119,6 +142,8 @@ public class CategoriesFragment extends RoboSherlockListFragment {
                     .create();
             dialog.show();
         }
+        ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
+        setListAdapter(listAdapter);
     }
 
 }
