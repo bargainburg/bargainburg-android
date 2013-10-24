@@ -2,12 +2,10 @@ package com.bargainburg.android.API;
 
 import android.util.Log;
 import com.bargainburg.android.API.Model.Category;
+import com.bargainburg.android.API.Model.Coupon;
 import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.API.Model.Search;
-import com.bargainburg.android.API.Responses.CategoryResponse;
-import com.bargainburg.android.API.Responses.CompaniesResponse;
-import com.bargainburg.android.API.Responses.CompanyResponse;
-import com.bargainburg.android.API.Responses.SearchResponse;
+import com.bargainburg.android.API.Responses.*;
 import com.bargainburg.android.Data.Datastore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,6 +34,7 @@ public class BargainBurgApi {
     public static final String SEARCH_URL = "http://api.bargainburg.co/v1/search?query=";
     public static final String MERCHANTS = "merchants";
     public static final String EXPAND_COUPONS = "?expand_coupons=1";
+    public static final String COUPON_URL = "http://api.bargainburg.co/v1/coupons/";
 
     private Datastore mDataStore;
     private OkHttpClient mOkHttpClient;
@@ -114,6 +113,13 @@ public class BargainBurgApi {
         String url = BACKEND_URL_COMPANIES + "" + id + EXPAND_COUPONS;
         CompanyResponse response = new CompanyResponse();
         response.company = get(url, Merchant.class);
+        return response;
+    }
+
+    public CouponResponse getCoupon(int id) throws Exception {
+        String url = COUPON_URL + "" + id;
+        CouponResponse response = new CouponResponse();
+        response.coupon = get(url, Coupon.class);
         return response;
     }
 }

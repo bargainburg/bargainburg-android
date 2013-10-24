@@ -6,10 +6,7 @@ import android.util.Log;
 import com.bargainburg.android.API.Responses.*;
 import com.bargainburg.android.Data.Datastore;
 import com.bargainburg.android.Otto.BusProvider;
-import com.bargainburg.android.Otto.Events.CategoryEvent;
-import com.bargainburg.android.Otto.Events.CompaniesEvent;
-import com.bargainburg.android.Otto.Events.CompanyEvent;
-import com.bargainburg.android.Otto.Events.SearchEvent;
+import com.bargainburg.android.Otto.Events.*;
 import com.bargainburg.android.Util.EX;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
@@ -28,9 +25,9 @@ public class APIService extends RoboIntentService {
 
     public static final int GET_CATEGORIES = 0x01;
     public static final int GET_COMPANIES = 0x02;
-    public static final int GET_COUPONS = 0x03;
+    public static final int GET_COMPANY_COUPONS = 0x03;
     public static final int GET_COMPANIES_FOR_CATEGORY = 0x04;
-    public static final int GET_COMPANY_COUPONS = 0x05;
+    public static final int GET_COUPON = 0x05;
     public static final int SEARCH = 0x06;
 
     private Gson mGson = new Gson();
@@ -67,9 +64,29 @@ public class APIService extends RoboIntentService {
             case SEARCH:
                 query = extras.getString(EX.QUERY);
                 search(query);
+                break;
+            case GET_COUPON:
+                id = extras.getInt(EX.ID);
+                getCoupon(id);
             default:
                 break;
         }
+    }
+
+    private void getCoupon(int id) {
+        BaseResponse response;
+        try {
+            response = mBargainBurgApi.getCoupon(id);
+            response.success = true;
+            response.error = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = new CategoryResponse();
+            response.success = false;
+            response.error = true;
+        }
+        Log.d("API", "posting response : success == " + response.success);
+        BusProvider.getInstance().post(new CouponEvent((CouponResponse) response));
     }
 
     private void search(String query) {

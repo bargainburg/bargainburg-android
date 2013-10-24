@@ -15,6 +15,7 @@ import com.bargainburg.android.API.Model.Merchant;
 import com.bargainburg.android.Adapters.ListAdapterCoupons;
 import com.bargainburg.android.Otto.BusProvider;
 import com.bargainburg.android.Otto.Events.CompanyEvent;
+import com.bargainburg.android.Otto.Events.CouponEvent;
 import com.bargainburg.android.R;
 import com.bargainburg.android.Util.EX;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockListActivity;
@@ -83,15 +84,10 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        new AlertDialog.Builder(this).setTitle(coupons.get(position).name)
-                .setMessage(coupons.get(position).description)
-                .setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create().show();
+        Intent intent = new Intent(this, APIService.class);
+        intent.putExtra(APIService.API_CALL, APIService.GET_COUPON);
+        intent.putExtra(EX.ID, coupons.get(position).id);
+        startService(intent);
     }
 
     @Subscribe
@@ -108,6 +104,21 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
             setListAdapter(listAdapter);
         } else {
             Log.d("API", "failure!");
+        }
+    }
+
+    @Subscribe
+    public void getCoupon(CouponEvent couponEvent) {
+        if (couponEvent.response.success) {
+            new AlertDialog.Builder(this).setTitle(couponEvent.response.coupon.name)
+                    .setMessage(couponEvent.response.coupon.description)
+                    .setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
         }
     }
 
