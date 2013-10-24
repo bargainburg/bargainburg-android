@@ -41,7 +41,7 @@ public class StartupActivity extends RoboSherlockFragmentActivity implements Act
         pager.setAdapter(new OakAdapter(getSupportFragmentManager()));
         pager.setOnPageChangeListener(this);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        pager.setOffscreenPageLimit(2-=);
+        pager.setOffscreenPageLimit(2);
     }
 
 
