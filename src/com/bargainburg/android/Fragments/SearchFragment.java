@@ -76,6 +76,11 @@ public class SearchFragment extends RoboSherlockListFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 0) {
+                    searchResults = new ArrayList<Search>();
+                    ListAdapter listAdapter = new ListAdapterSearch(getActivity(), searchResults);
+                    setListAdapter(listAdapter);
+                }
                 if (s.toString().length() > 0) {
                     Intent intent = new Intent(getActivity(), APIService.class);
                     intent.putExtra(APIService.API_CALL, APIService.SEARCH);
