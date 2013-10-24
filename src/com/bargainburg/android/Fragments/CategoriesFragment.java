@@ -32,9 +32,6 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(getActivity(), APIService.class);
-        intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
-        getActivity().startService(intent);
         Log.d("API", "starting service");
         ListAdapter listAdapter = new ListAdapterCategories(getActivity(), categories);
         setListAdapter(listAdapter);
@@ -44,6 +41,11 @@ public class CategoriesFragment extends RoboSherlockListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        if (categories.size() == 0) {
+            Intent intent = new Intent(getActivity(), APIService.class);
+            intent.putExtra(APIService.API_CALL, APIService.GET_CATEGORIES);
+            getActivity().startService(intent);
+        }
         BusProvider.getInstance().register(this);
     }
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.actionbarsherlock.view.MenuItem;
 import com.bargainburg.android.API.APIService;
 import com.bargainburg.android.API.Model.Coupon;
 import com.bargainburg.android.API.Model.Merchant;
@@ -72,6 +73,7 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         getSupportActionBar().setTitle(company.name);
         phoneNumber.setText(company.phone);
         dialog = new AlertDialog.Builder(this).create();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -93,6 +95,17 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         intent.putExtra(APIService.API_CALL, APIService.GET_COUPON);
         intent.putExtra(EX.ID, coupons.get(position).id);
         startService(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Subscribe
