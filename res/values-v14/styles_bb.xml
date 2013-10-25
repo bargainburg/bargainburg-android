@@ -20,6 +20,7 @@
 <resources>
 
     <style name="Theme.Bb" parent="@style/Theme.Sherlock.Light">
+        <item name="android:selectableItemBackground">@drawable/selectable_background_bb</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background_bb</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Bb</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Bb</item>
@@ -34,6 +35,7 @@
     </style>
 
     <style name="ActionBar.Solid.Bb" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
+        <item name="android:selectableItemBackground">@drawable/selectable_background_bb</item>
         <item name="android:background">@drawable/ab_solid_bb</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_bb</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_bb</item>
@@ -41,6 +43,7 @@
     </style>
 
     <style name="ActionBar.Solid.Bb" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
+        <item name="android:selectableItemBackground">@drawable/selectable_background_bb</item>
         <item name="background">@drawable/ab_solid_bb</item>
         <item name="android:titleTextStyle">@style/ActionBar.Solid.Bb.TitleTextStyle</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_bb</item>
@@ -49,10 +52,12 @@
     </style>
 
     <style name="ActionBar.Solid.Bb.TitleTextStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:selectableItemBackground">@drawable/selectable_background_bb</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="ActionBar.Transparent.Bb" parent="@style/Widget.Sherlock.Light.ActionBar">
+        <item name="android:selectableItemBackground">@drawable/selectable_background_bb</item>
         <item name="android:background">@drawable/ab_transparent_bb</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Bb</item>
     </style>
