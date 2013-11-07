@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
@@ -93,7 +92,10 @@ public class CategoryListActivity extends RoboSherlockListActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                Intent intent = new Intent(this, StartupActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

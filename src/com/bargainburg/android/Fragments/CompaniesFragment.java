@@ -110,9 +110,8 @@ public class CompaniesFragment extends RoboSherlockListFragment {
     public void getCompanies(CompaniesEvent companiesEvent) {
         busy_view.setVisibility(View.GONE);
         companies = new ArrayList<Merchant>();
-        if (companiesEvent.response.companies != null) {
+        if (companiesEvent.response.companies != null && companiesEvent.response.companies.size() > 0) {
             dialog.dismiss();
-            Log.d("API", "success!" + companiesEvent.response.companies.get(0).name);
             for (Merchant company : companiesEvent.response.companies) {
                 Log.d("API", company.name);
                 companies.add(company);

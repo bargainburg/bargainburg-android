@@ -49,7 +49,7 @@
     </style>
 
     <style name="ActionBar.Transparent.Bb" parent="@style/Widget.Sherlock.Light.ActionBar">
-        <item name="android:selectableItemBackground">@drawable/selectable_background_bb</item>
+        <item name="android:selectableItemBackground">@drawable/selectable_background_bb</item>d
         <item name="background">@drawable/ab_transparent_bb</item>
         <item name="progressBarStyle">@style/ProgressBar.Bb</item>
     </style>
