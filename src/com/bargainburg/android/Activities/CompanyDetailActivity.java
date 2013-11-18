@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListAdapter;
@@ -26,6 +28,7 @@ import com.squareup.otto.Subscribe;
 import roboguice.inject.InjectView;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,8 +57,13 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         }
         context = this;
         company = new Gson().fromJson(savedInstanceState.getString(EX.ITEM), Merchant.class);
+
         phoneNumber.setText(company.phone);
+        Linkify.addLinks(phoneNumber, Linkify.PHONE_NUMBERS);
+        phoneNumber.setLinkTextColor(Color.parseColor("#FFFFFF"));
         email.setText(company.email);
+        Linkify.addLinks(email, Linkify.EMAIL_ADDRESSES);
+        email.setLinkTextColor(Color.parseColor("#FFFFFF"));
         hours.setText(company.hours);
         if (company.priceRange == 1) {
             price.setText(EX.PRICE);
@@ -71,7 +79,7 @@ public class CompanyDetailActivity extends RoboSherlockListActivity {
         intent.putExtra(EX.ID, company.id);
         startService(intent);
         getSupportActionBar().setTitle(company.name);
-        phoneNumber.setText(company.phone);
+        //phoneNumber.setText(company.phone);
         dialog = new AlertDialog.Builder(this).create();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
