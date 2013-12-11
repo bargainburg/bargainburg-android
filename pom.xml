@@ -5,7 +5,7 @@
     <groupId>com.bargainburg.android</groupId>
     <!--ideally, we'd like this to follow the format of "PROJECTNAME-android"-->
     <artifactId>bargainburg-android</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>apk</packaging>
     <name>bargainburg-android</name>
 
