@@ -29,12 +29,12 @@ import java.util.List;
  */
 public class BargainBurgApi {
 
-    public static final String BACKEND_URL_CATEGORIES = "http://api.bargainburg.co/v1/categories/";
-    public static final String BACKEND_URL_COMPANIES = "http://api.bargainburg.co/v1/merchants/";
+    public static final String BACKEND_URL_CATEGORIES = "http://api.dev.bargainburg.co/v1/categories/";
+    public static final String BACKEND_URL_COMPANIES = "http://api.dev.bargainburg.co/v1/merchants/";
     public static final String SEARCH_URL = "http://api.bargainburg.co/v1/search?query=";
     public static final String MERCHANTS = "merchants";
     public static final String EXPAND_COUPONS = "?expand_coupons=1";
-    public static final String COUPON_URL = "http://api.bargainburg.co/v1/coupons/";
+    public static final String COUPON_URL = "http://api.dev.bargainburg.co/v1/coupons/";
 
     private Datastore mDataStore;
     private OkHttpClient mOkHttpClient;
